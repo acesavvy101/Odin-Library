@@ -41,3 +41,14 @@ function displayBook (array) {
 
 displayBook(myLibrary);
 
+/*initial pseudocode:
+1.create a button, onclick function add book
+2.insdie the function , bring up a form where it requires user input
+3.add button submit
+4. button submit onlick, prevent default
+5. create  a new book from user inputs
+6. append new book to myLibrary, then display!*/
+
+function addNewBook () {
+    
+}
