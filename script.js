@@ -8,6 +8,12 @@ function Book (title , author, pageNo, readStatus) { //parameter should describe
     this.isRead = readStatus; //ure just storing the data, not changing it into a behavior
     this.bookId = crypto.randomUUID();
 }
+
+Book.prototype.toggleStatus = function () {
+    //flip the book read status
+    
+}
+
 const Book1 = new Book ("The Secret History", "Donna Tartt", 600 , true);
 const Book2 = new Book ("The Invention of Morel", "Adolfo Bioy Casares" , 120, true);
 const Book3 = new Book ("The Kites" , "Romain Gary", 320, false);
@@ -25,11 +31,14 @@ const cardContainer = document.getElementById("cardContainer");
 cardContainer.addEventListener("click", (e)=> {
     const item = e.target.closest("button"); 
     item.dataset.id //the button already has an ID!
-    
-    //REASSIGNING NOT DECLARING A NEW ONE DUMBASS
+    if (item.textContent === "Delete") {
+        //REASSIGNING NOT DECLARING A NEW ONE DUMBASS
     myLibrary = myLibrary.filter(book => book.bookId !== item.dataset.id); //create a new array with everything that passes the conditional
     cardContainer.replaceChildren();
     displayBook(myLibrary)
+    } else {
+        
+    } 
 });
 
 function displayBook (array) {
@@ -37,10 +46,13 @@ function displayBook (array) {
         const card = document.createElement("div");
         const cardText = document.createElement("p");
         const deleteBtn = document.createElement("button")
+        const readBtn = document.createElement("button")
 
+        readBtn.textContent = "read"
         deleteBtn.textContent = "Delete"
         //link each delete button with the bookinstance id
         deleteBtn.dataset.id = `${book.bookId}`
+        readBtn.dataset.id = `${book.bookId}`
 
         //u want to display the PROPERTIES of an obj 
         cardText.textContent = //youre assining one string (with 4 lines) to textContent 
@@ -51,6 +63,7 @@ function displayBook (array) {
             Book ID: ${book.bookId}`
         //the text content should be each of these books and their attributes
 
+        card.append(readBtn);
         card.append(cardText);
         card.append(deleteBtn)
         cardContainer.append(card);
@@ -97,4 +110,3 @@ submitBtn.addEventListener("click", (e) =>{
     cardContainer.replaceChildren();
     displayBook(myLibrary)
 })
-
