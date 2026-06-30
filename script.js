@@ -1,18 +1,20 @@
 let myLibrary = [];
 
-/*the contructor receives the values, then it stores the values into PROPERTIES */
-function Book (title , author, pageNo, readStatus) { //parameter should describe the meaning not type!
-    this.title = title;
-    this.author = author;
-    this.pageNo = pageNo;
-    this.isRead = readStatus; //ure just storing the data, not changing it into a behavior
-    this.bookId = crypto.randomUUID();
+class Book {
+    constructor(title, author, pageNo, readStatus) {
+        this.title = title;
+        this.author = author;
+        this.pageNo = pageNo;
+        this.isRead = readStatus; //ure just storing the data, not changing it into a behavior
+        this.bookId = crypto.randomUUID();
+    }
+
+    toggleStatus() {
+        //flip the book read status
+        this.isRead =! this.isRead;
+    }
 }
 
-Book.prototype.toggleStatus = function () {
-    //flip the book read status
-    this.isRead =! this.isRead;
-}
 
 const Book1 = new Book ("The Secret History", "Donna Tartt", 600 , true);
 const Book2 = new Book ("The Invention of Morel", "Adolfo Bioy Casares" , 120, true);
@@ -121,3 +123,4 @@ submitBtn.addEventListener("click", (e) =>{
     cardContainer.replaceChildren();
     displayBook(myLibrary)
 })
+
